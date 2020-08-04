@@ -1,0 +1,41 @@
+.seat-wrapper {
+  margin-left: 23%;
+  margin-right: 23%;
+  margin-top: 3%;
+}
+
+.seatgrid {
+  padding: 0 20% 0 20%;
+  display: grid;
+  grid-template-columns: repeat(22, 1fr);
+  grid-template-rows: repeat(19, 1fr);
+  width: 100%;
+}
+.screen {
+  grid-column-start: 2;
+  grid-column-end: 22;
+  background-color: lightgray;
+  color: gray;
+  text-align: center;
+  border-radius: 10px;
+}
+.screenblank {
+  grid-column-start: 1;
+  grid-column-end: 23;
+}
+
+.seat {
+  background-color: grey;
+  width: 24px;
+  height: 24px;
+  margin: 10%;
+  cursor: pointer;
+  border-radius: 20%;
+  text-align: center;
+  color: lightgray;
+}
+.seat:after {
+  content: "";
+  display: block;
+  padding-bottom: 0%;
+}

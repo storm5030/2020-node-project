@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../header"); %>
+    <link rel="stylesheet" href="/stylesheets/movie/list.css" />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="content">
+        <%- include("../menu"); %>
+
+        <div class="listwrapper row row-cols-2 row-cols-md-1">
+          <% result.forEach(movie => { %>
+          <div class="col mb-1">
+            <!-- Card -->
+            <div class="card_">
+              <!-- Card image -->
+              <div class="card-image view overlay">
+                <img
+                  class="card-img-top"
+                  src="/images/<%= movie.title.replace('#', '').replace(':', '') %>.jpg"
+                  alt="Card image cap"
+                />
+                <div class="mask flex-center rgba-stylish-strong">
+                  <ul style="padding: 0; margin: 0;">
+                    <button
+                      type="button"
+                      class="btn hoverbtn"
+                      onclick="location.href='/api/reservation/<%=movie._id %>'"
+                    >
+                      예매하기
+                    </button>
+                    <button type="button" class="btn hoverbtn" onclick="location.href='/api/movie/<%= movie._id %>'">
+                      상세정보
+                    </button>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Card content -->
+              <div class="card-body">
+                <!-- Title -->
+                <h4 class="card-title" style="font-weight: bolder;"><%= movie.title %></h4>
+                <!-- Text -->
+                <p class="card-text text1" style="margin-bottom: 0px;">
+                  장르 : <%= movie.genre %> | <%= movie.year %>.<%= movie.date %> 개봉 | <%= movie.time %>분
+                </p>
+                <p class="card-text text2" style="margin-bottom: 0px;">
+                  감독 : <%= movie.director %>
+                </p>
+                <p class="card-text text3" style="margin-bottom: 0px;">
+                  출연 : <%= movie.actor %>
+                </p>
+              </div>
+            </div>
+            <!-- Card -->
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+
+    <%- include("../footer"); %>
+  </body>
+</html>

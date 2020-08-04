@@ -1,0 +1,70 @@
+<!--Navbar-->
+<div
+  style="
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+  "
+>
+  <!-- <i class="fas fa-lightbulb yellow-text"></i> -->
+  <a style="color: #c62828;" href="/">DIMICINEMA</a>
+</div>
+<nav
+  class="navbar sticky-top navbar-expand-lg navbar-dark"
+  style="font-family: 'Nanum Gothic'; background-color: #c62828;"
+>
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">홈 </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/api/movie/">현재상영작</a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="/api/music">Music</a>
+      </li> -->
+    </ul>
+    <!-- Links -->
+    <% if (user === null) { %>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/api/user/login">로그인</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/api/user/signup">회원가입</a>
+      </li>
+    </ul>
+    <% } else { %>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link profile"><%= user.name %>님</a>
+      </li>
+      <% if (user.role === 1) { %>
+      <!-- Dropdown -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+          >관리자 모드</a
+        >
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/api/movie/admin">영화목록 관리</a>
+          <a class="dropdown-item" href="/api/reservation/listAdmin">예매내역 관리</a>
+        </div>
+      </li>
+      <% } else { %>
+      <li class="nav-item">
+        <a class="nav-link profile" href="/api/reservation/list/<%= user._id %>">예매내역</a>
+      </li>
+      <% } %>
+      <li class="nav-item">
+        <a class="nav-link" href="/api/user/logout">로그아웃</a>
+      </li>
+    </ul>
+    <% } %>
+  </div>
+</nav>
+<!--/.Navbar-->

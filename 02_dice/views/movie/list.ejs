@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../header"); %>
+    <link rel="stylesheet" href="/stylesheets/movie/list.css" />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="content">
+        <%- include("../menu"); %>
+
+        <!-- <button type="button" class="btn btn-primary" onclick="location.href='/api/movie/new'">
+          등록
+        </button> -->
+
+        <div class="listwrapper row row-cols-1 row-cols-md-1" style="margin-left: 20%; margin-right: 20%;">
+          <% result.forEach(movie => { %>
+          <div class="col mb-1">
+            <!-- Card -->
+            <div class="card_">
+              <!-- Card image -->
+              <div style="float: left;">
+                <a href="/api/movie/<%= movie._id %>">
+                  <img
+                    class="card-img-top"
+                    src="/images/<%= movie.title.replace('#', '').replace(':', '') %>.jpg"
+                    alt="Card image cap"
+                    style="height: 200px; width: auto;"
+                  />
+                </a>
+              </div>
+
+              <!-- Card content -->
+              <div class="card-body" style="float: left;">
+                <!-- Title -->
+                <h4 class="card-title" style="font-weight: bolder;"><%= movie.title %></h4>
+                <!-- Text -->
+                <p class="card-text" style="margin-bottom: 0px;">
+                  장르 : <%= movie.genre %> | <%= movie.year %>.<%= movie.date %> 개봉 | <%= movie.time %>분
+                </p>
+                <p class="card-text" style="margin-bottom: 0px;">
+                  감독 : <%= movie.director %>
+                </p>
+                <p class="card-text" style="margin-bottom: 0px;">
+                  출연 : <%= movie.actor %>
+                </p>
+              </div>
+            </div>
+            <!-- Card -->
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+
+    <%- include("../footer"); %>
+  </body>
+</html>

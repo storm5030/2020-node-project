@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../header"); %>
+  <link rel="stylesheet" href="/stylesheets/user/login.css" />
+  <body>
+    <div class="wrapper">
+      <div class="content">
+        <%- include("../menu"); %>
+
+        <!-- Default form login -->
+        <form id="loginForm" class="text-center border border-light p-5 userwrapper" action="#!">
+          <p class="h4 mb-4">Sign in</p>
+
+          <!-- Email -->
+          <input type="id" id="identification" class="form-control" placeholder="id" />
+          <p id="idError" class="errtext"></p>
+
+          <!-- Password -->
+          <input type="password" id="password" class="form-control" placeholder="Password" />
+          <p id="passwordError" class="errtext"></p>
+
+          <!-- Sign in button -->
+          <button class="btn btn-red my-4" type="submit">로그인</button>
+
+          <!-- Register -->
+          <p><a class="smalltext" href="/api/user/signup">계정이 없으신가요?</a>
+        </form>
+        <!-- Default form login -->
+
+       
+        </div>
+      </div>
+    </div>
+    <%- include("../footer"); %>
+    <script>
+      $(function () {
+        $("#loginForm").submit((event) => {
+          event.preventDefault();
+          // 로그인
+          const identification = $("#identification").val();
+          const password = $("#password").val();
+
+          $.ajax({
+            url: "/api/user/login",
+            type: "POST",
+            data: {identification, password},
+          })
+            .done(() => {
+              location.href = "/";
+            })
+            .fail((request, status, error) => {
+
+              if (request.status === 401) {
+                $("#idError").text(request.responseText);
+                $("#passwordError").text("");
+              } else if (request.status === 402) {
+                $("#idError").text("");
+                $("#passwordError").text(request.responseText);
+              } else {
+                alert(request.responseText);
+              }
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

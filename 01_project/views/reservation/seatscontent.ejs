@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../header"); %>
+    <link rel="stylesheet" href="/stylesheets/reservation/seatscontent.css" />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="content">
+        <div class="seatgrid">
+          <div class="blank"></div>
+          <div class="screen">SCREEN</div>
+          <div class="blank"></div>
+          <div class="screenblank"></div>
+          <% var ascii = 65; %>
+          <!--  -->
+          <% for(i = 0; i <288; i++) { %>
+          <!--  -->
+          <% if(i%18 === 0) { %>
+          <!--  -->
+          <% if(i !== 0) { %>
+          <div class="blank"></div>
+          <% } %>
+          <div class="blank" style="font-weight: bolder; line-height: 40px;">
+            <%= String.fromCharCode(ascii) %>
+            <!--  -->
+            <% ascii = ascii + 1 %>
+          </div>
+          <!--  -->
+          <% } %>
+          <div id="<%= result.seats[i]%>" name="<%= i%>" class="seat"><%= i%18+1%></div>
+          <% if((i)%18 === 3 || (i)%18 === 13) { %>
+          <div class="blank"></div>
+          <% } %>
+          <!--  -->
+          <% if(i === 107) { %>
+          <!--  -->
+          <% for(j = 1; j <=22; j++) { %>
+          <div class="blank"></div>
+          <% } %>
+          <!--  -->
+          <% } %>
+          <!--  -->
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"
+    ></script>
+    <!-- Bootstrap core JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
+    ></script>
+    <!-- MDB core JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/js/mdb.min.js"
+    ></script>
+    <script>
+      //좌석 css
+      for (i = 0; i < 288; i++) {
+        var seatid = $("div[name=" + i + "]").attr("id");
+        var userid = "<%= user._id  %>";
+        //console.log(userid + " | " + seatid);
+        if (seatid === userid) {
+          $("div[name=" + i + "]").css("backgroundColor", "pink");
+          $("div[name=" + i + "]").css("color", "white");
+        } else if (seatid !== "empty") {
+          $("div[name=" + i + "]").css("backgroundColor", "white");
+          $("div[name=" + i + "]").css("border", "1px solid grey");
+          $("div[name=" + i + "]").removeAttr("onclick");
+          $("div[name=" + i + "]").css("cursor", "default");
+          $("div[name=" + i + "]").text("X");
+        }
+      }
+      $(".seat").click(function () {
+        const seatnum = $(this).attr("name");
+        const seatid = $("div[name=" + seatnum + "]").attr("id");
+        const userid = "<%= user._id  %>";
+        const userrole = "<%= user.role %>";
+        const username = "<%= user.name %>";
+        const movietitle = "<%= result.title %>";
+        console.log(seatnum);
+        if (seatid == "empty" && userrole !== "1") {
+          const answer = confirm("해당 좌석을 예매하시겠습니까?");
+          if (answer) {
+            $.ajax({
+              url: "/api/reservation/<%=result._id%>",
+              type: "PUT",
+              data: { userid, seatnum, username, movietitle },
+            })
+              .done(() => {
+                location.href = "/api/reservation/seatsframe";
+              })
+              .fail((request, status, error) => {
+                alert(request.responseText);
+              });
+          }
+        } else if (seatid === userid) {
+          const answer = confirm("예매를 취소하시겠습니까?");
+          if (answer) {
+            $.ajax({
+              url: "/api/reservation/cancel/<%=result._id%>",
+              type: "PUT",
+              data: { userid, seatnum },
+            })
+              .done(() => {
+                location.href = "/api/reservation/seatsframe";
+              })
+              .fail((request, status, error) => {
+                alert(request.responseText);
+              });
+          }
+        } else if (seatid !== "empty" && userrole === "1") {
+          const answer = confirm("관리자 권한으로 예매 내역을 삭제하시겠습니까?");
+          if (answer) {
+            $.ajax({
+              url: "/api/reservation/cancel/<%=result._id%>",
+              type: "PUT",
+              data: { userid: seatid, seatnum },
+            })
+              .done(() => {
+                location.href = "/api/reservation/seatsframe";
+              })
+              .fail((request, status, error) => {
+                alert(request.responseText);
+              });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

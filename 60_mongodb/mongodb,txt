@@ -1,0 +1,42 @@
+1. 관계형 데이터베이스 (RDB) : MySQL, MariaDB, MSSQL, Oracle, SQLite, PostgreSQL
+- 관계형 모델 설게
+- 테이블 스키마 고정
+- SQL문에 CRUD
+
+2. NoSQL (non SQL, Not only SQL) : MongoDB
+- 스키마 유동적
+- 저장, 단순 검색에 유리
+- 빅데이터 -> 분산 서버에 용이
+
+3. MongoDB 테스트
+1) Server 실행 : mongod --dbpath=data
+2) Client 실행 : mongo
+
+4. MongoDB Shell Command
+1) Database
+- db : 현재 데이터베이스
+- show dbs : 전체 데이터베이스 목록
+- use <db명> : 다른 데이터베이스로 스위치
+- db.dropDatabase() : 현재 데이터베이스 삭제
+
+2) Collection
+- db.createCollection("컬렉션명") : 컬렉션 생성
+- show collections : 컬렉션 목록
+- db.music.drop() : 컬렉션 삭제
+
+3) Document
+- db.music.insert({ .. }) : 생성
+- db.music.find() : 한 줄로 조회
+- db.music.find().pretty() : 여러 줄로 정렬
+- db.music.find()({조회조건})
+- db.music.find({}, {_id: 0, singer: 1, ..}) : 0-숨김, 1-보여줌
+- db.music.find().limit(2)
+- db.music.update({조회조건}, {수정할 내용}) : 도큐먼트 전체 수정
+- db.music.update({조회조건}, {$set: {수정할 내용}}) : 특정 필드만 업데이트
+- db.music.remove({삭제조건}) : 도큐먼트 삭제
+- db.music.remove({}) : 전체 삭제
+
+5. ODM (Object Document Mapping) 도구 : Mongoose
+1) Schema 생성
+- 
+- 

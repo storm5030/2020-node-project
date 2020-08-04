@@ -1,0 +1,58 @@
+.gridcontainer {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  grid-template-areas:
+    "title genre"
+    "year date"
+    "time audience"
+    "director actor"
+    "synopsis synopsis"
+    "synopsis synopsis"
+    "synopsis synopsis"
+    "synopsis synopsis";
+}
+.title {
+  grid-area: title;
+}
+.genre {
+  grid-area: genre;
+}
+.year {
+  grid-area: year;
+}
+.date {
+  grid-area: date;
+}
+.time {
+  grid-area: time;
+}
+.audience {
+  grid-area: audience;
+}
+.director {
+  grid-area: director;
+}
+.actor {
+  grid-area: actor;
+}
+.synopsis {
+  grid-area: synopsis;
+}
+#synopsis {
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  height: 100%;
+}
+#synopsis :focus {
+  outline: none;
+}
+.md-form {
+  padding-right: 30px;
+}
+.btn {
+  background-color: red;
+  color: white;
+}

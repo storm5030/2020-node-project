@@ -1,0 +1,36 @@
+/* list, create, update */
+.listwrapper {
+  margin: 0 20% 0 20%;
+}
+/* detail */
+.card-wrapper {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+/* seat */
+.seat-wrapper {
+  margin-left: 50%;
+}
+.userwrapper {
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+@media screen and (max-width: 768px) {
+  .listwrapper {
+    margin: 0 5% 0 5%;
+  }
+  /* detail */
+  .card-wrapper {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  /* seat */
+  .seat-wrapper {
+    margin-left: 5%;
+  }
+  .userwrapper {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}

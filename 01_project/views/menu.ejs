@@ -1,0 +1,115 @@
+<!--Navbar-->
+<div
+  style="
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 8px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+  "
+>
+  <!-- <i class="fas fa-lightbulb yellow-text"></i> -->
+  <a style="color: #c62828;" href="/">DIMICINEMA</a>
+</div>
+<nav
+  class="navbar sticky-top navbar-expand-lg navbar-dark"
+  style="font-family: 'Nanum Gothic'; background-color: #c62828;"
+>
+  <!-- Collapse button -->
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#basicExampleNav"
+    aria-controls="basicExampleNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    style="padding-left: 0;"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">홈 </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/api/movie/">현재상영작</a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="/api/music">Music</a>
+      </li> -->
+      <form id="searchForm" class="form-inline mr-auto">
+        <div class="md-form my-0">
+          <input
+            id="search"
+            class="form-control mr-sm-2"
+            type="text"
+            placeholder="영화 검색"
+            required
+            style="padding-top: 7.5px; margin-left: 6px; width: 200px;"
+          />
+        </div>
+      </form>
+    </ul>
+
+    <!-- Links -->
+    <% if (user === null) { %>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item"><a></a></li>
+      <li class="nav-item">
+        <a class="nav-link" href="/api/user/login">로그인</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/api/user/signup">회원가입</a>
+      </li>
+    </ul>
+    <% } else { %>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item"><a></a></li>
+      <li class="nav-item">
+        <a class="nav-link profile"><%= user.name %>님</a>
+      </li>
+      <% if (user.role === 1) { %>
+      <!-- Dropdown -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+          >관리자 모드</a
+        >
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/api/movie/admin">영화목록 관리</a>
+          <a class="dropdown-item" href="/api/reservation/listAdmin">예매내역 관리</a>
+        </div>
+      </li>
+      <% } else { %>
+      <li class="nav-item">
+        <a class="nav-link profile" href="/api/reservation/list/<%= user._id %>">예매내역</a>
+      </li>
+      <% } %>
+      <li class="nav-item">
+        <a class="nav-link" href="/api/user/logout">로그아웃</a>
+      </li>
+    </ul>
+    <% } %>
+  </div>
+</nav>
+<!--/.Navbar-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(function () {
+    $("#searchForm").submit((event) => {
+      event.preventDefault(); //submit의 기본 속성인 화면 refresh를 막음
+      const search = $("#search").val();
+      $.ajax({})
+        .done(() => {
+          location.href = "/api/movie/search?search=" + search;
+        })
+        .fail((request, status, error) => {
+          alert(request.responseText);
+        });
+    });
+  });
+</script>

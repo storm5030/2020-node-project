@@ -1,0 +1,39 @@
+.wrapper {
+  margin-left: 0%;
+  margin-right: 20;
+}
+.gridcontainer {
+  margin-left: -490px;
+  width: 980px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas:
+    "grid1 grid1 grid2 grid2 grid3 grid3 grid3 grid4 grid4 grid4"
+    "grid5 grid5 grid5 grid5 grid5 grid6 grid6 grid4 grid4 grid4";
+}
+.grid1 {
+  grid-area: grid1;
+}
+.grid2 {
+  grid-area: grid2;
+}
+.grid3 {
+  grid-area: grid3;
+}
+.grid4 {
+  grid-area: grid4;
+  padding-left: 5px;
+}
+.grid5 {
+  grid-area: grid5;
+  padding-top: 5px;
+}
+.grid6 {
+  grid-area: grid6;
+  padding-top: 5px;
+  padding-left: 5px;
+}
+.grid-wrapper {
+  margin-left: 50%;
+}

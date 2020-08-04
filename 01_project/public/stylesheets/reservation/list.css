@@ -1,0 +1,21 @@
+.card_ {
+  border-top: 1px solid gray;
+  padding: 20px 0 20px 0;
+  overflow: auto;
+}
+
+.listwrapper {
+  margin-top: 40px;
+  border-bottom: 1px solid gray;
+}
+.card-body {
+  width: calc(90% - 93px);
+}
+.hoverbtn {
+  color: white;
+  border: 1px white solid;
+  border-radius: 10px;
+  padding: 5px 15px 5px 15px;
+  font-size: 10px;
+  margin: 5px;
+}

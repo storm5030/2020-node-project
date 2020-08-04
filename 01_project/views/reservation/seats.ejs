@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../header"); %>
+    <link rel="stylesheet" href="/stylesheets/reservation/seats.css" />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="content">
+        <%- include("../menu"); %>
+
+        <!-- <button type="button" class="btn btn-primary" onclick="location.href='/api/movie/new'">
+          등록
+        </button> -->
+
+        <div class="seat-wrapper">
+          <div class="title"><i class="fas fa-film"></i> <%= result.title %></div>
+          <iframe src="/api/reservation/seatsframe" class="frame" frameborder="0" scrolling="yes"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <%- include("../footer"); %>
+  </body>
+</html>

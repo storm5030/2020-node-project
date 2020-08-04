@@ -1,0 +1,40 @@
+.content {
+  padding: 20px 0 20px 0;
+}
+.seatgrid {
+  display: grid;
+  grid-template-columns: repeat(22, 40px);
+  grid-template-rows: repeat(19, 40px);
+  width: 100%;
+}
+.screen {
+  grid-column-start: 2;
+  grid-column-end: 22;
+  background-color: lightgray;
+  color: gray;
+  text-align: center;
+  border-radius: 10px;
+  line-height: 40px;
+}
+.screenblank {
+  grid-column-start: 1;
+  grid-column-end: 23;
+}
+
+.seat {
+  background-color: grey;
+  margin: 10%;
+  cursor: pointer;
+  border-radius: 20%;
+  text-align: center;
+  color: lightgray;
+  line-height: 32px;
+}
+.seat:after {
+  content: "";
+  display: block;
+  padding-bottom: 0%;
+}
+
+@media screen and (max-width: 700px) {
+}

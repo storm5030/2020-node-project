@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../header"); %>
+    <link rel="stylesheet" href="/stylesheets/movie/detailAdmin.css" />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="content">
+        <%- include("../menu"); %>
+
+        <div class="card-wrapper">
+          <!-- Card image -->
+          <div style="display: inline-block;">
+            <img
+              class="card-img-top"
+              src="/images/<%= result.title.replace('#', '').replace(':', '') %>.jpg"
+              alt="Card image cap"
+              style="height: 300px; width: auto;"
+            />
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body" style="display: inline-block; width: auto;">
+            <!-- Title -->
+            <div style="display: inline-block;">
+              <h4 class="card-title"><%= result.title %></h4>
+            </div>
+            <!-- Text -->
+            <div class="btn-wrapper" style="float: right;">
+              <button type="button" class="btn btn-red" onclick="location.href='/api/movie/admin'">
+                목록
+              </button>
+              <button
+                type="button"
+                class="btn btn-red"
+                onclick="location.href='/api/movie/admin/<%= result._id %>/edit'"
+              >
+                수정
+              </button>
+              <button id="deleteBtn" type="button" class="btn btn-red">
+                삭제
+              </button>
+            </div>
+            <p class="card-text">
+              장르 : <%= result.genre %> | <%= result.year %>.<%= result.date %> 개봉 | <%= result.time %>분
+            </p>
+            <p class="card-text">
+              감독 : <%= result.director %>
+            </p>
+            <p class="card-text">
+              출연 : <%= result.actor %>
+            </p>
+            <p class="card-text">
+              누적관객수 : <%= result.audience %>명
+            </p>
+          </div>
+
+          <div class="synopsis-wrapper">
+            <p style="font-weight: bold;">시놉시스</p>
+            <textarea class="synopsis" readonly><%= result.synopsis %></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include("../footer"); %>
+    <script>
+      $(function () {
+        // 삭제
+        $("#deleteBtn").on("click", () => {
+          const result = confirm("삭제하시겠습니까?");
+          if (result) {
+            $.ajax({
+              url: "/api/movie/admin/<%= result._id %>",
+              type: "DELETE",
+            })
+              .done(() => {
+                location.href = "/api/movie/admin";
+              })
+              .fail((request, status, error) => {
+                alert(request.responseText);
+              });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

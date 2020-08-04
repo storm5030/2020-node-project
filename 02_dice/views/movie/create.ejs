@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../header"); %>
+    <link rel="stylesheet" href="/stylesheets/movie/create.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="content">
+        <%- include("../menu"); %>
+        <form id="createForm" style="margin-left: 20%; margin-right: 20%;">
+          <div class="gridcontainer">
+            <!-- Material input -->
+            <div class="md-form title">
+              <input type="text" id="title" class="form-control" required />
+              <label for="Input title">제목</label>
+            </div>
+            <div class="md-form genre">
+              <input type="text" id="genre" class="form-control" required />
+              <label for="Input genre">장르</label>
+            </div>
+            <div class="md-form year">
+              <input type="text" id="year" class="form-control" required />
+              <label for="Input year">개봉년도</label>
+            </div>
+            <div class="md-form date">
+              <input type="text" id="date" class="form-control" required />
+              <label for="Input date">개봉일</label>
+            </div>
+            <div class="md-form time">
+              <input type="text" id="time" class="form-control" required />
+              <label for="Input time">상영시간</label>
+            </div>
+            <div class="md-form audience">
+              <input type="text" id="audience" class="form-control" required />
+              <label for="Input audience">누적관객수</label>
+            </div>
+            <div class="md-form director">
+              <input type="text" id="director" class="form-control" required />
+              <label for="Input director">감독</label>
+            </div>
+            <div class="md-form actor">
+              <input type="text" id="actor" class="form-control" required />
+              <label for="Input actor">출연</label>
+            </div>
+
+            <div class="md-form synopsis">
+              <textarea id="synopsis" class="form-control" required></textarea>
+              <label for="Input synopsis">시놉시스</label>
+            </div>
+          </div>
+          <div class="btn_wrapper">
+            <button type="sumbit" class="btn btn-red">
+              저장
+            </button>
+            <button type="button" onclick="location.href='/api/movie/admin'" class="btn btn-red">
+              뒤로가기
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <%- include("../footer"); %>
+    <script>
+      $(function () {
+        $("#createForm").submit((event) => {
+          event.preventDefault(); //submit의 기본 속성인 화면 refresh를 막음
+          //등록
+          const title = $("#title").val();
+          const genre = $("#genre").val();
+          const year = $("#year").val();
+          const date = $("#date").val();
+          const time = $("#time").val();
+          const audience = $("#audience").val();
+          const director = $("#director").val();
+          const actor = $("#actor").val();
+          const synopsis = $("#synopsis").val();
+
+          $.ajax({
+            url: "/api/movie",
+            type: "POST",
+            data: { title, genre, year, date, time, audience, director, actor, synopsis },
+          })
+            .done(() => {
+              location.href = "/api/movie/admin";
+            })
+            .fail((request, status, error) => {
+              alret(request.responseText);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

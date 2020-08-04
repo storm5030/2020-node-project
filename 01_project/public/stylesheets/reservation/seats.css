@@ -1,0 +1,32 @@
+.seat-wrapper {
+  margin-top: 3%;
+  height: 900px;
+}
+
+.frame {
+  position: absolute;
+  margin-left: -460px;
+  width: 920px;
+  height: 900px;
+}
+
+.title {
+  margin-left: -420px;
+  font-size: 30px;
+  font-weight: bold;
+}
+@media screen and (max-width: 768px) {
+  .frame {
+    margin-left: 0;
+    width: 90%;
+    height: 70vh;
+  }
+  .title {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+  .seat-wrapper {
+    height: 70vh;
+  }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../header"); %>
+  <body>
+    <%- include("../menu"); %>
+    <form id="updateForm">
+      <!-- Material input -->
+      <div class="md-form">
+        <input
+          type="text"
+          id="singer"
+          class="form-control"
+          value="<%= result.singer %>"
+          required
+        />
+        <label for="Input singer">Input Singer</label>
+      </div>
+      <div class="md-form">
+        <input
+          type="text"
+          id="title"
+          class="form-control"
+          value="<%= result.title %>"
+          required
+        />
+        <label for="Input title">Input Title</label>
+      </div>
+      <button type="sumbit" class="btn btn-primary">
+        저장
+      </button>
+    </form>
+    <%- include("../footer"); %>
+    <script>
+      $(function () {
+        $("#updateForm").submit((event) => {
+          event.preventDefault(); //submit의 기본 속성인 화면 refresh를 막음
+          //등록
+          const singer = $("#singer").val();
+          const title = $("#title").val();
+
+          $.ajax({
+            url: "/api/music/<%= result._id %>",
+            type: "PUT",
+            data: { singer, title },
+          })
+            .done(() => {
+              location.href = "/api/music/<%= result._id %>";
+            })
+            .fail((request, status, error) => {
+              alret(request.responseText);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

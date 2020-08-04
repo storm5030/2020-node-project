@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../header"); %>
+  <body>
+    <%- include("../menu"); %>
+
+    <button
+      type="button"
+      class="btn btn-primary"
+      onclick="location.href='/api/movie/new'"
+    >
+      등록
+    </button>
+
+    <div class="row row-cols-1 row-cols-md-4">
+      <% result.forEach(movie => { %>
+      <div class="col mb-4">
+        <!-- Card -->
+
+        <div class="card">
+          <!-- Card image -->
+          <!-- <img
+            class="card-img-top"
+            src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
+            alt="Card image cap"
+          /> -->
+
+          <!-- Card content -->
+          <div class="card-body">
+            <!-- Title -->
+            <h4 class="card-title"><%= movie.title %></h4>
+            <!-- Text -->
+            <p class="card-text">
+              <%= movie.director %>
+            </p>
+            <p class="card-text">
+              <%= movie.year %>
+            </p>
+            <!-- Button -->
+            <a href="/api/movie/<%= movie._id %>" class="btn btn-primary"
+              >More</a
+            >
+          </div>
+        </div>
+        <!-- Card -->
+      </div>
+      <% }) %>
+    </div>
+    <%- include("../footer"); %>
+  </body>
+</html>

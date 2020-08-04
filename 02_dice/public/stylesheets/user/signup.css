@@ -1,0 +1,19 @@
+#signupForm {
+  margin: 50px 30% 50px 30%;
+}
+.btn {
+  width: 100%;
+  margin-left: 0;
+}
+.smalltext {
+  color: black;
+  font-size: 13px;
+}
+.errtext {
+  color: red;
+  font-size: 13px;
+  margin-top: 10px;
+}
+input {
+  margin-bottom: 15px;
+}

@@ -1,0 +1,17 @@
+.wrapper {
+  margin-left: 0%;
+  margin-right: 20;
+}
+.carousel-wrapper {
+  margin: 40px 12.5% 0 12.5%;
+}
+
+@media screen and (max-width: 768px) {
+  .carousel-wrapper {
+    margin: 0 0 0 0;
+    width: 100%;
+  }
+  .carousel-indicators {
+    margin-bottom: 0;
+  }
+}

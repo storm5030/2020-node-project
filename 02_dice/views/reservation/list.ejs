@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("../header"); %>
+    <link rel="stylesheet" href="/stylesheets/reservation/list.css" />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="content">
+        <%- include("../menu"); %>
+
+        <!-- <button type="button" class="btn btn-primary" onclick="location.href='/api/movie/new'">
+          등록
+        </button> -->
+
+        <div class="listwrapper row row-cols-1 row-cols-md-1" style="margin-left: 20%; margin-right: 20%;">
+          <p style="font-size: 20px; font-weight: bold;">예매내역</p>
+          <% result.forEach(result => { %>
+          <div class="col mb-1">
+            <!-- Card -->
+            <div class="card_">
+              <!-- Card image -->
+              <div style="float: left;">
+                <a href="/api/movie/<%= result.movieid %>">
+                  <img
+                    class="card-img-top"
+                    src="/images/<%= result.movietitle.replace('#', '').replace(':', '') %>.jpg"
+                    alt="Card image cap"
+                    style="height: 130px; width: auto;"
+                  />
+                </a>
+              </div>
+
+              <!-- Card content -->
+              <div class="card-body" style="float: left; width: 90%;" style="position: relative;">
+                <!-- Title -->
+                <h4 class="card-title" style="font-weight: bolder;"><%= result.movietitle %></h4>
+                <!-- Text -->
+                <div class="card-text" style="margin-bottom: 0px;">
+                  <%= String.fromCharCode(65 + result.seatnum/18) %>열 <%= result.seatnum%18 + 1 %>번
+                </div>
+                <div class="card-text" style="margin-bottom: 0px;"></div>
+                <button
+                  id="delete"
+                  type="button"
+                  class="btn btn-red"
+                  onclick="location.href='/api/reservation/<%= result.movieid%>'"
+                  style="position: absolute; top: 30%; right: 2%;"
+                >
+                  예매 수정
+                </button>
+              </div>
+            </div>
+            <!-- Card -->
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+
+    <%- include("../footer"); %>
+  </body>
+</html>
